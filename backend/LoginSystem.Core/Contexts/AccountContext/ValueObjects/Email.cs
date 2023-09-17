@@ -1,5 +1,6 @@
-﻿using LoginSystem.Core.SharedContext.Extensions;
-using LoginSystem.Core.SharedContext.ValueObjects;
+﻿using LoginSystem.Core.Contexts.AccountContext.ValueObjects;
+using LoginSystem.Core.Contexts.SharedContext.Extensions;
+using LoginSystem.Core.Contexts.SharedContext.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
