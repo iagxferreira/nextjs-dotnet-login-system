@@ -11,6 +11,7 @@ namespace LoginSystem.Core.AccountContext.ValueObjects
 {
     public partial class Email : ValueObject
     {
+        protected Email() { }
         public Email(string address)
         {
             if(string.IsNullOrEmpty(address)) throw new Exception("Null email");

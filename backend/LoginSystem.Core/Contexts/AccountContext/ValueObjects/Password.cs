@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoginSystem.Core.AccountContext.ValueObjects
+namespace LoginSystem.Core.Contexts.AccountContext.ValueObjects
 {
     public class Password
     {
@@ -20,9 +20,9 @@ namespace LoginSystem.Core.AccountContext.ValueObjects
         public string Hash { get; } = string.Empty;
         public string ResetCode { get; } = Guid.NewGuid().ToString("N")[..8].ToUpper();
 
-        private static string Generate( short length = 16, bool includeSpecialChars = true, bool upperCase = false)
+        private static string Generate(short length = 16, bool includeSpecialChars = true, bool upperCase = false)
         {
-            var chars = includeSpecialChars ? (Valid + Special) : Valid;
+            var chars = includeSpecialChars ? Valid + Special : Valid;
             var startRandom = upperCase ? 26 : 0;
             var index = 0;
             var res = new char[length];

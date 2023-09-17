@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoginSystem.Core.SharedContext.ValueObjects
+namespace LoginSystem.Core.Contexts.SharedContext.ValueObjects
 {
     public abstract class ValueObject
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoginSystem.Core.SharedContext.Extensions
+namespace LoginSystem.Core.Contexts.SharedContext.Extensions
 {
     public static class StringExtension
     {

@@ -1,11 +1,11 @@
-﻿using LoginSystem.Core.SharedContext.ValueObjects;
+﻿using LoginSystem.Core.Contexts.SharedContext.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoginSystem.Core.AccountContext.ValueObjects
+namespace LoginSystem.Core.Contexts.AccountContext.ValueObjects
 {
     public class Verification : ValueObject
     {

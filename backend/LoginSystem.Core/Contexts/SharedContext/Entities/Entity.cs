@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoginSystem.Core.SharedContext.Entities
+namespace LoginSystem.Core.Contexts.SharedContext.Entities
 {
     public abstract class Entity : IEquatable<Guid>
     {
