@@ -19,7 +19,7 @@ namespace LoginSystem.Core.Contexts.AccountContext.ValueObjects
         {
             if (IsActive) throw new Exception("Code already used.");
             if (ExpiresAt < DateTime.UtcNow) throw new Exception("Expired code.");
-            if (!string.Equals(code.Trim(), Code.Trim(), StringComparison.CurrentCultureIgnoreCase)
+            if (!string.Equals(code.Trim(), Code.Trim(), StringComparison.CurrentCultureIgnoreCase))
                 throw new Exception("Invalid verification code.");
         }
     }
