@@ -12,6 +12,14 @@ namespace LoginSystem.Core.Contexts.AccountContext.Entities
     public class User : Entity
     {
         protected User() { }
+
+        public User(string name, Email email, Password password)
+        {
+            Email = email;
+            Password = password;
+            Name = name;
+        }
+
         public User(string email, string? password = null)
         {
             Email = email;
