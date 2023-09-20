@@ -2,6 +2,7 @@
 using LoginSystem.Core.Contexts.AccountContext.Entities;
 using LoginSystem.Core.Contexts.AccountContext.UseCases.Create.Contracts;
 using LoginSystem.Core.Contexts.AccountContext.ValueObjects;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LoginSystem.Core.Contexts.AccountContext.UseCases.Create
 {
-    public class Handler
+    public class Handler : IRequestHandler<Request, Response>
     {
         private readonly IRepository _repository;
         private readonly IService _service;

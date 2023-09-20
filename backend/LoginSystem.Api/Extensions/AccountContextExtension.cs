@@ -1,4 +1,4 @@
-﻿namespace LoginSystem.Api.Extensions
+﻿    namespace LoginSystem.Api.Extensions
 {
     public static class AccountContextExtension
     {
