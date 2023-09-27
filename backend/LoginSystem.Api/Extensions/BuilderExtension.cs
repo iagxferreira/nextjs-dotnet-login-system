@@ -14,10 +14,10 @@ namespace LoginSystem.Api.Extensions
 
         public static void AddConfiguration(this WebApplicationBuilder builder)
         {
-            Configuration.Database.ConnectionString =
-            builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
+            Configuration.Database.ConnectionString = 
+                builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
 
-            Configuration.Secrets.ApiKey =
+            Configuration.Secrets.ApiKey = 
                 builder.Configuration.GetSection("Secrets").GetValue<string>("ApiKey") ?? string.Empty;
             Configuration.Secrets.JwtPrivateKey =
                 builder.Configuration.GetSection("Secrets").GetValue<string>("JwtPrivateKey") ?? string.Empty;

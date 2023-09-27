@@ -3,6 +3,7 @@ using LoginSystem.Core.Contexts.AccountContext.ValueObjects;
 using LoginSystem.Core.Contexts.SharedContext.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,28 +12,33 @@ namespace LoginSystem.Core.Contexts.AccountContext.Entities
 {
     public class User : Entity
     {
-        protected User() { }
+        protected User()
+        {
+        }
 
         public User(string name, Email email, Password password)
         {
+            Name = name;
             Email = email;
             Password = password;
-            Name = name;
         }
 
         public User(string email, string? password = null)
         {
             Email = email;
-            Password = new(password);
+            Password = new Password(password);
         }
-        public string Name { get; private set; }
-        public Email Email { get; private set; }
-        public Password Password { get; private set; }
-        public string Image { get; private set; }
+
+        public string Name { get; private set; } = string.Empty;
+        public Email Email { get; private set; } = null!;
+        public Password Password { get; private set; } = null!;
+        public string Image { get; private set; } = string.Empty;
+        //public List<Role> Roles { get; set; } = new();
+
         public void UpdatePassword(string plainTextPassword, string code)
         {
             if (!string.Equals(code.Trim(), Password.ResetCode.Trim(), StringComparison.CurrentCultureIgnoreCase))
-                throw new Exception("Invalid restore token.");
+                throw new Exception("Código de restauração inválido");
 
             var password = new Password(plainTextPassword);
             Password = password;
