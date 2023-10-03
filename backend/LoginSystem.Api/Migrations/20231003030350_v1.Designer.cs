@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoginSystem.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230919002053_v1")]
+    [Migration("20231003030350_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -24,6 +24,23 @@ namespace LoginSystem.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("LoginSystem.Core.Contexts.AccountContext.Entities.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role", (string)null);
+                });
 
             modelBuilder.Entity("LoginSystem.Core.Contexts.AccountContext.Entities.User", b =>
                 {
@@ -46,6 +63,21 @@ namespace LoginSystem.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User", (string)null);
+                });
+
+            modelBuilder.Entity("UserRole", b =>
+                {
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RoleId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("LoginSystem.Core.Contexts.AccountContext.Entities.User", b =>
@@ -124,6 +156,21 @@ namespace LoginSystem.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Password")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("UserRole", b =>
+                {
+                    b.HasOne("LoginSystem.Core.Contexts.AccountContext.Entities.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LoginSystem.Core.Contexts.AccountContext.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

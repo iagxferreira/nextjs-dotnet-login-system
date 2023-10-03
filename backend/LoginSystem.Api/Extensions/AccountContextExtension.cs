@@ -1,5 +1,4 @@
-﻿using LoginSystem.Core.Contexts.AccountContext.UseCases.Create;
-using MediatR;
+﻿using MediatR;
 
 namespace LoginSystem.Api.Extensions
 {
@@ -23,6 +22,10 @@ namespace LoginSystem.Api.Extensions
                 Core.Contexts.AccountContext.UseCases.Authenticate.Contracts.IRepository,
                 Infra.Contexts.AccountContext.UseCases.Authenticate.Repository>();
             #endregion
+
+            builder.Services.AddAuthorization(x => { x.AddPolicy("Admin", p => p.RequireRole("Admin")); });
+            builder.Services.AddAuthorization(x => { x.AddPolicy("Student", p => p.RequireRole("Student")); });
+            builder.Services.AddAuthorization(x => { x.AddPolicy("Premium", p => p.RequireRole("Premium")); });
         }
 
         public static void MapAccountEndpoints(this WebApplication app)
@@ -38,7 +41,7 @@ namespace LoginSystem.Api.Extensions
                         return result.IsSuccess
                             ? Results.Created($"/api/users{result.Data?.Id}", result)
                             : Results.Json(result, statusCode: result.Status);
-                });
+                }).AllowAnonymous();
 
             #endregion
 
@@ -56,7 +59,22 @@ namespace LoginSystem.Api.Extensions
 
                         result.Data.Token = JwtExtension.Generate(result.Data);
                         return Results.Ok(result);
-                    });
+                    }).AllowAnonymous();
+
+            app.MapGet("/api/v1/admin", async () =>
+            {
+                return Results.Json(new { message = "Hello admin" });
+            }).RequireAuthorization("Admin");
+
+            app.MapGet("/api/v1/student", async () =>
+            {
+                return Results.Json(new { message = "Hello student" });
+            }).RequireAuthorization("Student");
+
+            app.MapGet("/api/v1/premium", async () =>
+            {
+                return Results.Json(new { message = "Hello premium" });
+            }).RequireAuthorization("Premium");
 
             #endregion
         }
