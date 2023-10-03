@@ -78,15 +78,15 @@ namespace LoginSystem.Core.Contexts.AccountContext.UseCases.Create
             }
             #endregion
             #region Send activation email
-            try
-            {
-                await _service.SendVerificationEmailAsync(user, cancellationToken);
-            }
-            catch
-            {
+            //try
+            //{
+            //    await _service.SendVerificationEmailAsync(user, cancellationToken);
+            //}
+            //catch
+            //{
 
-                // Log event
-            }
+            //    // Log event
+            //}
             #endregion
 
             return new Response("Account created with success", new ResponseData(user.Id,user.Name, user.Email));
